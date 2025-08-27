@@ -153,7 +153,7 @@ export default function Home() {
               value={intervalTime}
               onChange={setIntervalTime}
               min={30}
-              max={300}
+              max={900}
               step={15}
               label="Interval Time"
               labelColor="text-blue-400"
