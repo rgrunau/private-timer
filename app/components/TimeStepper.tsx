@@ -30,6 +30,7 @@ const TimeStepper = ({
   const [isPressed, setIsPressed] = useState<'minus' | 'plus' | null>(null)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const longPressTriggeredRef = useRef(false)
 
   const hapticFeedback = useCallback(() => {
     if (typeof navigator !== 'undefined' && navigator.vibrate) {
@@ -53,19 +54,21 @@ const TimeStepper = ({
     }
   }, [value, step, min, onChange, hapticFeedback])
 
-  const startLongPress = useCallback((action: 'increment' | 'decrement') => {
+  const startPress = useCallback((action: 'increment' | 'decrement') => {
     const fn = action === 'increment' ? increment : decrement
-    
-    // Initial delay before rapid changes
-    timeoutRef.current = setTimeout(() => {
-      intervalRef.current = setInterval(fn, 100) // Rapid changes every 100ms
-    }, 500) // Start rapid changes after 500ms
+    longPressTriggeredRef.current = false
     
     // Execute once immediately
     fn()
+    
+    // Set up long press timeout
+    timeoutRef.current = setTimeout(() => {
+      longPressTriggeredRef.current = true
+      intervalRef.current = setInterval(fn, 100) // Rapid changes every 100ms
+    }, 500) // Start rapid changes after 500ms
   }, [increment, decrement])
 
-  const stopLongPress = useCallback(() => {
+  const stopPress = useCallback(() => {
     if (intervalRef.current) {
       clearInterval(intervalRef.current)
       intervalRef.current = null
@@ -75,14 +78,15 @@ const TimeStepper = ({
       timeoutRef.current = null
     }
     setIsPressed(null)
+    longPressTriggeredRef.current = false
   }, [])
 
   // Cleanup on unmount
   useEffect(() => {
     return () => {
-      stopLongPress()
+      stopPress()
     }
-  }, [stopLongPress])
+  }, [stopPress])
 
   const formatValue = () => {
     if (type === 'minutes') {
@@ -118,17 +122,17 @@ const TimeStepper = ({
           disabled={value <= min}
           onMouseDown={() => {
             setIsPressed('minus')
-            startLongPress('decrement')
+            startPress('decrement')
           }}
-          onMouseUp={stopLongPress}
-          onMouseLeave={stopLongPress}
+          onMouseUp={stopPress}
+          onMouseLeave={stopPress}
           onTouchStart={(e) => {
             e.preventDefault()
             setIsPressed('minus')
-            startLongPress('decrement')
+            startPress('decrement')
           }}
-          onTouchEnd={stopLongPress}
-          onTouchCancel={stopLongPress}
+          onTouchEnd={stopPress}
+          onTouchCancel={stopPress}
           aria-label={`Decrease ${label.toLowerCase()}`}
         >
           <Minus className="h-5 w-5" />
@@ -148,17 +152,17 @@ const TimeStepper = ({
           disabled={value >= max}
           onMouseDown={() => {
             setIsPressed('plus')
-            startLongPress('increment')
+            startPress('increment')
           }}
-          onMouseUp={stopLongPress}
-          onMouseLeave={stopLongPress}
+          onMouseUp={stopPress}
+          onMouseLeave={stopPress}
           onTouchStart={(e) => {
             e.preventDefault()
             setIsPressed('plus')
-            startLongPress('increment')
+            startPress('increment')
           }}
-          onTouchEnd={stopLongPress}
-          onTouchCancel={stopLongPress}
+          onTouchEnd={stopPress}
+          onTouchCancel={stopPress}
           aria-label={`Increase ${label.toLowerCase()}`}
         >
           <Plus className="h-5 w-5" />
