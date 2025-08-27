@@ -6,11 +6,13 @@ import { Play, Pause, RotateCcw, Home, Volume2, VolumeX } from 'lucide-react'
 import { useTimerStore } from '@/lib/store'
 import { formatTime, getPhaseColor, getPhaseTextColor, getPhaseLabel } from '@/lib/utils'
 import { playStartBeep, playTransitionBeep, playCompletionBeep, setAudioEnabled } from '@/lib/audio'
+import { useWakeLock } from '@/lib/useWakeLock'
 
 export default function TimerPage() {
   const router = useRouter()
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
   const [audioEnabled, setAudioEnabledState] = useState(true)
+  const { requestWakeLock, releaseWakeLock } = useWakeLock()
   
   const {
     currentConfig,
@@ -52,6 +54,7 @@ export default function TimerPage() {
           if (totalTimeRemaining <= 1) {
             completeTimer()
             playCompletionBeep()
+            releaseWakeLock()
             clearInterval(intervalRef.current!)
           } else {
             nextPhase()
@@ -71,12 +74,13 @@ export default function TimerPage() {
         clearInterval(intervalRef.current)
       }
     }
-  }, [status, currentTime, totalTimeRemaining, updateTimer, completeTimer, nextPhase])
+  }, [status, currentTime, totalTimeRemaining, updateTimer, completeTimer, nextPhase, releaseWakeLock])
 
   const handleStart = async () => {
     if (typeof navigator !== 'undefined' && navigator.vibrate) {
       navigator.vibrate(100)
     }
+    await requestWakeLock()
     startTimer()
     await playStartBeep()
   }
@@ -92,6 +96,7 @@ export default function TimerPage() {
     if (typeof navigator !== 'undefined' && navigator.vibrate) {
       navigator.vibrate(100)
     }
+    releaseWakeLock()
     resetTimer()
   }
 
@@ -99,6 +104,7 @@ export default function TimerPage() {
     if (intervalRef.current) {
       clearInterval(intervalRef.current)
     }
+    releaseWakeLock()
     router.push('/')
   }
 
