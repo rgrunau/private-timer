@@ -2,27 +2,75 @@
 
 A completely private interval timer for workouts - no tracking, no data collection, no compromises on privacy.
 
-## Features
+## What Makes It Special
 
-### Timer Modes
-- **Intervals**: Custom work/rest periods with automatic round counting
-- **EMOM**: Every Minute on the Minute training with customizable intervals
+### 🔒 Privacy First Design
+- **Zero data collection** - No analytics, tracking, or user accounts
+- **Local storage only** - All workout data stays on your device
+- **No external calls** - Works completely offline after first load
+- **No ads or trackers** - Clean, focused experience
 
-### Core Features
-- 🔒 **100% Private** - All data stays on your device
-- 🔊 **Audio Cues** - Different beeps for start, transitions, and completion
-- 🎨 **Color-Coded Phases** - Visual indicators for work (green), rest (orange), EMOM (blue)
-- 💾 **Save Workouts** - Store favorite configurations locally
-- 📱 **PWA Ready** - Install as an app on mobile or desktop
-- 🌐 **Offline First** - Works completely offline after first load
+### ⏱️ Powerful Timer Modes
 
-### Privacy First
-- ❌ No user accounts or registration
-- ❌ No data collection or analytics  
-- ❌ No tracking pixels or cookies
-- ❌ No external API calls
-- ❌ No ads or third-party integrations
-- ✅ Everything stored locally on your device
+**Interval Training**
+- Set custom work and rest periods (5s to 10min each)
+- Automatic round counting based on total workout time
+- Perfect for HIIT, Tabata, or circuit training
+- Example: 30s work, 10s rest for 20 minutes = 30 rounds
+
+**EMOM (Every Minute on the Minute)**
+- Set interval duration (30s to 15min)
+- Complete exercises within each interval, rest for remainder
+- Great for strength training and pacing workouts
+- Example: 5 burpees every minute for 10 minutes
+
+### 📱 Mobile-First Features
+
+**Screen Wake Lock**
+- Keeps your phone screen on during workouts
+- Automatically releases when timer stops or pauses
+- No more missing cues because your screen went dark
+
+**Haptic Feedback**
+- Vibration cues on button presses and timer events
+- Works alongside audio cues for better awareness
+- Customizable audio on/off toggle
+
+**PWA Installation**
+- Install as a native app on any device
+- Works offline once installed
+- Full-screen experience without browser UI
+
+### 🎨 Smart Visual Design
+
+**Color-Coded Phases**
+- **Green**: Work periods - time to push hard
+- **Orange**: Rest periods - recover and prepare
+- **Blue**: EMOM intervals - steady pacing
+- **Purple**: Completion - workout finished!
+
+**Dynamic Progress Bars**
+- Individual phase progress (current work/rest/interval)
+- Total workout progress with time remaining
+- Visual feedback for motivation and pacing
+
+**Responsive Timer Display**
+- Large, easy-to-read countdown timer
+- Works in any lighting condition
+- Status messages for current phase and round
+
+### 🔊 Audio System
+
+**Smart Beep System**
+- **Start beep** (600Hz): Workout begins
+- **Transition beep** (800Hz): Phase changes
+- **Completion sequence** (400Hz): Workout finished
+- Generated using Web Audio API - no sound files needed
+
+**Audio Controls**
+- Toggle audio on/off during workouts
+- Respects browser audio policies
+- Works with device volume controls
 
 ## Getting Started
 
@@ -49,21 +97,44 @@ npm start
 
 ## How to Use
 
-### Interval Training
-1. Select "Intervals" mode
-2. Set work time (e.g., 30 seconds)  
-3. Set rest time (e.g., 10 seconds)
-4. Choose total workout duration
-5. Save configuration (optional)
-6. Press "Start Workout"
+### Quick Start
+1. **Choose your mode**: Intervals for HIIT or EMOM for paced training
+2. **Set your times**: Work/rest periods or interval duration
+3. **Pick total duration**: How long you want to train
+4. **Hit start**: Large green button begins your workout immediately
 
-### EMOM Training
-1. Select "EMOM" mode
-2. Set interval duration (e.g., 1 minute)
-3. Choose total workout time
-4. Save configuration (optional) 
-5. Press "Start Workout"
-6. Complete exercises within each interval
+### Saving & Loading Workouts
+- **Save configurations**: Name and store your favorite workout setups
+- **Quick access**: Load saved workouts from the "Load Saved" page
+- **Local storage**: All saved workouts stay on your device
+
+### During Your Workout
+- **Large timer display**: Easy to see from across the gym
+- **Color changes**: Visual cues for each phase transition  
+- **Audio cues**: Beeps signal starts, transitions, and completion
+- **Progress tracking**: See current round and total progress
+- **Pause/resume**: Life happens - pause anytime, resume when ready
+- **Reset option**: Start over if you need to adjust mid-workout
+
+### Real-World Examples
+
+**HIIT Cardio Session**
+- Mode: Intervals
+- Work: 45 seconds, Rest: 15 seconds  
+- Total: 20 minutes → 20 rounds
+- Perfect for: Burpees, mountain climbers, jumping jacks
+
+**Strength Training EMOM**
+- Mode: EMOM
+- Interval: 90 seconds
+- Total: 15 minutes → 10 rounds
+- Perfect for: 5 pull-ups every 90s, rest remaining time
+
+**Tabata Protocol**
+- Mode: Intervals
+- Work: 20 seconds, Rest: 10 seconds
+- Total: 4 minutes → 8 rounds
+- Perfect for: High-intensity exercises, research-backed timing
 
 ## Install as PWA
 
@@ -91,6 +162,15 @@ npm start
 
 ## Why This Exists
 
-Most fitness apps collect extensive data about your workouts, location, and personal habits for advertising and analytics. Private Timer proves you can have a great user experience while respecting privacy completely.
+Most fitness timer apps are bloated with ads, require accounts, track your data, or cost money for basic features. We built Private Timer because:
 
-Your workout data should stay with you - no compromises, no trade-offs.
+- **Your workout data should stay private** - No accounts, no cloud sync, no data mining
+- **Simple tools should stay simple** - Timer apps don't need social features or premium subscriptions  
+- **Offline should be the default** - Your gym doesn't always have WiFi
+- **Free should mean free** - No hidden costs, premium tiers, or advertising
+
+Private Timer proves you can have a beautiful, full-featured workout timer while respecting your privacy completely.
+
+## Contributing
+
+Found a bug or want to improve something? Check out the [CLAUDE.md](CLAUDE.md) file for development guidance, or open an issue on GitHub.

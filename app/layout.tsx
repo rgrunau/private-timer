@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navigation from "./components/Navigation";
+import UpdateManager from "./components/UpdateManager";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,6 +43,13 @@ export default function RootLayout({
           <main className="flex-1">
             {children}
           </main>
+          <UpdateManager 
+            notificationOptions={{ 
+              show: true, 
+              duration: 3000, 
+              position: 'bottom' 
+            }}
+          />
         </div>
       </body>
     </html>

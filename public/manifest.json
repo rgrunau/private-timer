@@ -3,10 +3,12 @@
   "short_name": "Timer",
   "description": "A completely private interval timer for workouts - no tracking, no data collection",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#111827",
   "theme_color": "#111827",
   "orientation": "portrait-primary",
+  "update_via_cache": "none",
   "icons": [
     {
       "src": "/icon-192x192.png",
@@ -29,5 +31,34 @@
       "type": "image/png",
       "form_factor": "narrow"
     }
-  ]
+  ],
+  "shortcuts": [
+    {
+      "name": "Start Timer",
+      "short_name": "Start",
+      "description": "Quickly start a workout timer",
+      "url": "/timer",
+      "icons": [
+        {
+          "src": "/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Saved Workouts",
+      "short_name": "Saved",
+      "description": "Access your saved workout configurations",
+      "url": "/saved",
+      "icons": [
+        {
+          "src": "/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "prefer_related_applications": false,
+  "lang": "en-US",
+  "dir": "ltr"
 }
